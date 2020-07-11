@@ -1,23 +1,23 @@
-import {bool, int, string} from './type';
+import {int, string} from './type';
 import asObject from "./asObject";
 
 // fun=123
 
 const Client = {
-	interface: string,
-	IPv4Addr: string,
-	IPv6Addr: string,
-	index: int,
-	interfaceid: int,
-	hostname: string,
-	MACAddr: string,
-	method: int, // Not sure what this stands for though
-	leaseTime: string,
-	speed: string, //MBit
+	interface : string,
+	IPv4Addr : string,
+	IPv6Addr : string,
+	index : int,
+	interfaceid : int,
+	hostname : string,
+	MACAddr : string,
+	method : int, // Not sure what this stands for though
+	leaseTime : string,
+	speed : string, //MBit
 }
 
 const ClientInfo = {
-	clientinfo: Client,
+	clientinfo : Client,
 }
 
 const typeMapper = {
@@ -32,10 +32,10 @@ export default async function cmState(xmlAsString) {
 	result.Ethernet = result.Ethernet.map(e => e.clientinfo)[0] || [];
 	result.WIFI = result.WIFI.map(e => e.clientinfo)[0] || [];
 	result.all = [];
-	if(Array.isArray(result.Ethernet)) {
+	if (Array.isArray(result.Ethernet)) {
 		result.all = [...result.all, ...result.Ethernet];
 	}
-	if(Array.isArray(result.WIFI)) {
+	if (Array.isArray(result.WIFI)) {
 		result.all = [...result.all, ...result.WIFI];
 	}
 	return result;

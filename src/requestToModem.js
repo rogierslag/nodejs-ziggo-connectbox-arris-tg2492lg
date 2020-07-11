@@ -30,6 +30,11 @@ async function login() {
 	const firstToken = getTokenFromResponse(index);
 	const password = process.env.PASSWORD;
 
+	if (!password) {
+		console.error('No password specified');
+		process.exit(1);
+	}
+
 	// Use that to get the actual SID an dtoken
 	const body = `token=${firstToken}&fun=15&Username=NULL&Password=${password}`;
 	const response = await fetch(`http://${host}/xml/setter.xml`, {
@@ -40,8 +45,18 @@ async function login() {
 		"body" : body,
 		"method" : "POST",
 	});
-	sid = (await response.text()).split(';')[1].split('=')[1].trim();
-	token = getTokenFromResponse(response);
+	if (!response.ok) {
+		console.error('Specified password incorrect');
+		process.exit(2);
+	}
+	try {
+		sid = (await response.text()).split(';')[1].split('=')[1].trim();
+		token = getTokenFromResponse(response);
+	} catch (e) {
+		console.error('Could not extract SID or token', e);
+		process.exit(3);
+	}
+	console.info('Login successful');
 
 	poll();
 }

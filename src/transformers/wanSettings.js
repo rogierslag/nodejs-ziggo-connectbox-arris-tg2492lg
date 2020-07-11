@@ -1,4 +1,4 @@
-import {bool, string, int} from './type';
+import {bool, int, string} from './type';
 import asObject from "./asObject";
 
 // fun=107

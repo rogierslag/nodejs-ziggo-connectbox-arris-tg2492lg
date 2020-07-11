@@ -62,7 +62,11 @@ server.get('/_health', (req, res) => {
 server.get('/is-online', (req, res) => {
 	getModemResponse(144, async data => {
 		const modemState = (await cmStatus(data));
-		res.json({modemState : modemState.provisioning_st, networkAccess: modemState.cm_network_access, isOnline : modemState.provisioning_st_num === 12});
+		res.json({
+			modemState : modemState.provisioning_st,
+			networkAccess : modemState.cm_network_access,
+			isOnline : modemState.provisioning_st_num === 12
+		});
 	});
 });
 
@@ -76,7 +80,7 @@ endpoints.forEach(([endpoint, funId, transformer]) => {
 });
 
 server.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname+'/index.html'));
+	res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 setInterval(refreshHealth, 60 * 1000);

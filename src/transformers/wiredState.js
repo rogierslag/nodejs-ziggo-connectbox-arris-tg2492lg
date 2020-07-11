@@ -1,11 +1,11 @@
-import {bool, int, string} from './type';
+import {int} from './type';
 import asObject from "./asObject";
 
 // fun=143
 
 const Port = {
-	Eth: int,
-	Speed: int,
+	Eth : int,
+	Speed : int,
 }
 
 const typeMapper = {

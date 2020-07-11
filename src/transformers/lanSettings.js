@@ -16,6 +16,6 @@ const typeMapper = {
 	DHCP_endaddress : string,
 };
 
-export default async function wanSettings(xmlAsString) {
+export default async function lanSettings(xmlAsString) {
 	return await asObject(xmlAsString, 'LANSetting', typeMapper);
 }

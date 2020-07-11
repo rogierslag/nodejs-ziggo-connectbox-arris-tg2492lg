@@ -91,7 +91,7 @@ async function poll() {
 export default async function get(funId, cb) {
 	toProcess.push({funId, cb});
 	if (!isPolling && token !== null && sid !== null) {
-		polll();
+		poll();
 	}
 }
 

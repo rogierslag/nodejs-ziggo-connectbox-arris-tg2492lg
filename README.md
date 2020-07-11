@@ -5,7 +5,7 @@ The service is started on port `3000`.
 
 ## Configuration
 
-The API is configured using environment variables
+The API is configured using environment variables.
 
 | Variable | Description | Required |
 |---|---|---|
@@ -15,6 +15,7 @@ The API is configured using environment variables
 ## Endpoints
 
 From the root endpoint `/` all implemented endpoints can be viewed.
+Some easy endpoints as `/is-online` and `_health` are exposed for quick consumption.
 
 ## Getting more data
 

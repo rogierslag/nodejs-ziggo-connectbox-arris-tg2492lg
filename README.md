@@ -25,4 +25,4 @@ This API currently has not implemented all of them.
 
 ## Docker
 
-This service is also available on Docker Hub. https://hub.docker.com/r/rogierslag/ziggo-connectbox-arris-tg2492lg
+This service is also available on Docker Hub. https://hub.docker.com/r/rogierslag/ziggo-connectbox-arris-tg2492lg-api

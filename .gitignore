@@ -2,3 +2,4 @@ node_modules
 
 # May contain private data
 example-data/getter.xml/*.xml
+example-data/getter.xml/**/*.xml

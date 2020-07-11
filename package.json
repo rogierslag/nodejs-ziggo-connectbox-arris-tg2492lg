@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0",
     "xml2js": "^0.4.23"
@@ -13,7 +14,6 @@
     "test": "mocha --require esm 'tests/**/*.js' 'tests/*.js'"
   },
   "devDependencies": {
-    "esm": "^3.2.25",
     "mocha": "^8.0.1"
   }
 }

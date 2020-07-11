@@ -50,19 +50,23 @@ function refreshHealth() {
 	getHealth(data => cachedHealth = data);
 }
 
+function sendFormattedJson(res, data) {
+	res.type('json').send(JSON.stringify(data, null, 4) + '\n');
+}
+
 server.get('/_health', (req, res) => {
 	if (req.query.fresh === 'true') {
 		// Method reference break here, so lambda it is
-		getHealth(json => res.json(json));
+		getHealth(json => sendFormattedJson(res, json));
 		return;
 	}
-	res.json({...cachedHealth, took : 0});
+	sendFormattedJson(res, {...cachedHealth, took : 0});
 });
 
 server.get('/is-online', (req, res) => {
 	getModemResponse(144, async data => {
 		const modemState = (await cmStatus(data));
-		res.json({
+		sendFormattedJson(res, {
 			modemState : modemState.provisioning_st,
 			networkAccess : modemState.cm_network_access,
 			isOnline : modemState.provisioning_st_num === 12
@@ -74,7 +78,7 @@ endpoints.forEach(([endpoint, funId, transformer]) => {
 	server.get(endpoint, (req, res) => {
 		getModemResponse(funId, async data => {
 			const json = await transformer(data)
-			res.json(json);
+			sendFormattedJson(res, json);
 		});
 	});
 });

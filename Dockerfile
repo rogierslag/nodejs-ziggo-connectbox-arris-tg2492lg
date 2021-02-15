@@ -1,4 +1,4 @@
-FROM node:12.13.0
+FROM node:12.13.0 as build-env
 
 RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb
 RUN wget http://ftp.us.debian.org/debian/pool/main/d/dumb-init/dumb-init_1.2.0-1_armhf.deb
@@ -12,4 +12,9 @@ ADD package.json /app
 RUN yarn install --pure-lockfile
 ADD src /app/src
 
-CMD ["dumb-init", "yarn", "start"]
+FROM gcr.io/distroless/nodejs:12
+COPY --from=build-env /app /app
+WORKDIR /app
+
+
+CMD ["--require","esm","src/index.js"]
